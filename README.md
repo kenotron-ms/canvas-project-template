@@ -1,89 +1,124 @@
 # amplifier-template
 
-An opinionated [Amplifier](https://github.com/microsoft/amplifier) starter configuration — cherry-picked behaviors, no bloat. Designed to work out of the box with tools like [`amplifier-app-cli`](https://github.com/kenotron-ms/amplifier-app-cli) while staying lean enough to extend without fighting the defaults.
+An opinionated [Amplifier](https://github.com/microsoft/amplifier) starter — everything you need to have a capable AI assistant running in your project in under 5 minutes, with no prior knowledge of Amplifier required.
 
-## Usage
+---
 
-### As a GitHub Template
+## Getting Started
 
-Click **Use this template** at the top of this repo to create your own copy, then clone it and run:
+Two prerequisites, then four commands. That's it.
+
+### Prerequisites
+
+- **[uv](https://docs.astral.sh/uv/getting-started/installation/)** — Python package manager
+
+  ```bash
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  ```
+
+- **[gh](https://cli.github.com/)** — GitHub CLI (and run `gh auth login` if you haven't already)
+
+  ```bash
+  # macOS
+  brew install gh
+
+  # Windows / Linux: https://cli.github.com/
+  ```
+
+---
+
+### Step 1 — Install Amplifier
 
 ```bash
-amplifier run
+uv tool install git+https://github.com/microsoft/amplifier
 ```
 
-### With amplifier-app-cli
+---
+
+### Step 2 — Create your project from this template
 
 ```bash
-amplifier-app-cli init --template kenotron-ms/amplifier-template
+gh repo create my-project --template kenotron-ms/amplifier-template --public --clone
+cd my-project
 ```
+
+Replace `my-project` with whatever you want to call your repo. Use `--private` if you prefer.
+
+---
+
+### Step 3 — Initialize
+
+```bash
+amplifier init
+```
+
+The wizard will ask for your AI provider and API key (Anthropic, OpenAI, Azure, Gemini, or Ollama) and wire everything up automatically.
+
+---
+
+### Step 4 — Start chatting
+
+```bash
+amplifier
+```
+
+That's it. You now have a fully configured AI assistant with persistent memory, multi-agent capabilities, structured workflows, and more — all scoped to your project.
 
 ---
 
 ## What's Included
 
+This template is a curated set of Amplifier behaviors. Here's what you get out of the box:
+
 ### Behaviors
 
-| Behavior | Source | What it gives you |
-|----------|--------|-------------------|
-| **amplifier-expert** | `microsoft/amplifier` | Expert consultant for the full Amplifier ecosystem — modules, repos, governance, and best practices |
-| **agents** | `amplifier-foundation` | Multi-agent orchestration: spawns specialist sub-agents (explorer, builder, bug-hunter, etc.) via a `delegate` tool |
-| **sessions** | `amplifier-foundation` | Session lifecycle awareness and management |
-| **streaming-ui** | `amplifier-foundation` | Streaming output with live progress rendering |
-| **status-context** | `amplifier-foundation` | Auto-injects git status, working directory, and current date/time into every turn |
-| **todo-reminder** | `amplifier-foundation` | Keeps the agent on track — prompts use of the todo tool for multi-step work |
-| **redaction** | `amplifier-foundation` | Scrubs secrets, API keys, and sensitive tokens from output before they leak |
-| **recipes** | `amplifier-bundle-recipes` | Declarative multi-step workflows with approval gates, resumability, and context accumulation across agent handoffs |
-| **modes** | `amplifier-bundle-modes` | Runtime behavior overlays: `/brainstorm`, `/debug`, `/execute-plan`, `/verify`, `/finish` and more |
-| **skills** | `amplifier-bundle-skills` | Loadable domain knowledge packages — bring structured best practices into any session on demand |
-| **apply-patch** | `amplifier-bundle-filesystem` | `apply_patch` tool for surgical multi-file edits and new file creation from a single operation |
-| **engram** | `kenotron-ms/engram` | Persistent memory — the agent can remember context across sessions |
+| Behavior | What it gives you |
+|----------|-------------------|
+| **amplifier-expert** | Built-in consultant for the Amplifier ecosystem itself — ask it anything about modules, bundles, or configuration |
+| **agents** | Spawns specialist sub-agents automatically for heavy tasks (code exploration, debugging, architecture, git operations, web research) |
+| **streaming-ui** | Responses stream in real time instead of appearing all at once |
+| **status-context** | The assistant always knows your current git branch, working directory, and the date — no need to tell it |
+| **todo-reminder** | Keeps the assistant on track during multi-step work with a visible task list |
+| **redaction** | Scrubs secrets and API keys from output before they can leak |
+| **recipes** | Reusable multi-step workflows with approval gates — great for things like full feature development cycles |
+| **modes** | Behavioral overlays you can toggle: `/brainstorm`, `/debug`, `/execute-plan`, `/verify`, `/finish` |
+| **skills** | Domain knowledge packages that load on demand — bring structured best practices into any session |
+| **apply-patch** | Lets the assistant make precise multi-file edits in a single operation |
+| **engram** | Persistent memory — the assistant remembers context across sessions |
 
-### Tools
+### Sub-Agents (called automatically when needed)
 
-| Tool | What it does |
-|------|-------------|
-| `tool-filesystem` | Read and write files on the local filesystem |
-| `tool-bash` | Execute shell commands |
-| `tool-web` | Fetch web pages and call HTTP endpoints |
-| `tool-search` | Search the web |
-
-### Sub-Agents (via `delegate`)
-
-The `agents` behavior makes these specialist agents available for delegation:
-
-| Agent | Best for |
-|-------|----------|
-| `foundation:explorer` | Deep codebase surveys across many files |
-| `foundation:file-ops` | Targeted file reads, writes, and searches |
-| `foundation:git-ops` | Commits, PRs, branch ops, GitHub API — with safety guardrails |
-| `foundation:bug-hunter` | Systematic debugging with hypothesis-driven methodology |
-| `foundation:modular-builder` | Implementation from a complete specification |
-| `foundation:zen-architect` | Architecture design, code review, and planning |
-| `foundation:web-research` | Multi-source web research and documentation lookup |
+| Agent | What it handles |
+|-------|----------------|
+| `explorer` | Surveying large codebases across many files |
+| `file-ops` | Targeted file reads, writes, and searches |
+| `git-ops` | Commits, PRs, branch management, GitHub API |
+| `bug-hunter` | Systematic debugging |
+| `modular-builder` | Implementing from a spec |
+| `zen-architect` | Architecture design, code review, planning |
+| `web-research` | Multi-source web research |
 
 ### Session Configuration
 
-| Setting | Value | Notes |
-|---------|-------|-------|
-| Orchestrator | `loop-streaming` | Streaming output, real-time token delivery |
-| Extended thinking | `true` | Deeper reasoning on complex problems |
-| Context module | `context-simple` | |
-| Max tokens | 200,000 | |
-| Auto-compact | `true` at 80% | Keeps long sessions running without manual intervention |
+| Setting | Value |
+|---------|-------|
+| Orchestrator | `loop-streaming` (real-time output) |
+| Extended thinking | Enabled |
+| Max context | 200,000 tokens |
+| Auto-compact | Yes — long sessions stay running automatically |
 
 ---
 
 ## Extending This Template
 
-Add more behaviors to the `includes:` section of `.amplifier/bundle.md`, following the same pattern:
+Add more behaviors by editing `.amplifier/bundle.md` and appending to the `includes:` list:
 
 ```yaml
 includes:
   - bundle: git+https://github.com/your-org/your-bundle@main#subdirectory=behaviors/your-behavior.yaml
 ```
 
-See the [Amplifier Foundation Bundle Guide](https://github.com/microsoft/amplifier-foundation) for authoring your own behaviors and bundles.
+See the [Amplifier Foundation Bundle Guide](https://github.com/microsoft/amplifier-foundation) for how to author your own.
 
 ---
 
