@@ -1,10 +1,15 @@
 # amplifier-template
 
-An opinionated [Amplifier](https://github.com/microsoft/amplifier) starter — everything you need to have a capable AI assistant running in your project in under 5 minutes, with no prior knowledge of Amplifier required.
+A project starter that works with **two AI tools** — use whichever fits your workflow, or both:
+
+- **[Amplifier](https://github.com/microsoft/amplifier)** — a powerful AI CLI with multi-agent capabilities, structured workflows, and persistent memory
+- **[Claude Code](https://docs.anthropic.com/en/docs/claude-code)** — Anthropic's VS Code extension, now with the same persistent memory via Engram
+
+Both tools share Engram for memory, so project knowledge accumulates regardless of which tool you're using.
 
 ---
 
-## Getting Started
+## Getting Started with Amplifier
 
 Two prerequisites, then four commands. That's it.
 
@@ -66,11 +71,34 @@ That's it. You now have a fully configured AI assistant with persistent memory, 
 
 ---
 
+## Getting Started with Claude Code
+
+If you use the [Claude Code](https://docs.anthropic.com/en/docs/claude-code) VS Code extension, this template pre-configures the [Engram](https://github.com/kenotron-ms/engram) plugin so persistent memory works from day one.
+
+### Step 1 — Create your project from this template
+
+```bash
+gh repo create my-project --template kenotron-ms/amplifier-template --public --clone
+cd my-project
+```
+
+### Step 2 — Open in VS Code
+
+Open the project folder in VS Code with Claude Code installed. The Engram plugin is registered in `.claude/settings.json` and loads automatically.
+
+### Step 3 — Initialize personal memory (first time only)
+
+```bash
+mkdir -p ~/.canvas/memory
+```
+
+That's it. Claude Code will now remember context across sessions for this project.
+
+---
+
 ## What's Included
 
-This template is a curated set of Amplifier behaviors. Here's what you get out of the box:
-
-### Behaviors
+### Amplifier Behaviors
 
 | Behavior | What it gives you |
 |----------|-------------------|
@@ -86,7 +114,7 @@ This template is a curated set of Amplifier behaviors. Here's what you get out o
 | **apply-patch** | Lets the assistant make precise multi-file edits in a single operation |
 | **engram** | Persistent memory — the assistant remembers context across sessions |
 
-### Sub-Agents (called automatically when needed)
+### Amplifier Sub-Agents (called automatically when needed)
 
 | Agent | What it handles |
 |-------|----------------|
@@ -98,7 +126,7 @@ This template is a curated set of Amplifier behaviors. Here's what you get out o
 | `zen-architect` | Architecture design, code review, planning |
 | `web-research` | Multi-source web research |
 
-### Session Configuration
+### Amplifier Session Configuration
 
 | Setting | Value |
 |---------|-------|
@@ -107,11 +135,19 @@ This template is a curated set of Amplifier behaviors. Here's what you get out o
 | Max context | 200,000 tokens |
 | Auto-compact | Yes — long sessions stay running automatically |
 
+### Claude Code Plugins
+
+| Plugin | What it gives you |
+|--------|-------------------|
+| **engram** | Persistent memory — project knowledge in `.canvas/memory/`, personal knowledge in `~/.canvas/memory/` |
+
 ---
 
 ## Extending This Template
 
-Add more behaviors by editing `.amplifier/bundle.md` and appending to the `includes:` list:
+### Add Amplifier behaviors
+
+Edit `.amplifier/bundle.md` and append to the `includes:` list:
 
 ```yaml
 includes:
@@ -119,6 +155,10 @@ includes:
 ```
 
 See the [Amplifier Foundation Bundle Guide](https://github.com/microsoft/amplifier-foundation) for how to author your own.
+
+### Add Claude Code plugins
+
+Edit `.claude/settings.json` and register additional plugins in `extraKnownMarketplaces` and `enabledPlugins`.
 
 ---
 
