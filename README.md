@@ -1,4 +1,4 @@
-# amplifier-template
+# canvas-project-template
 
 A project starter that works with **two AI tools** — use whichever fits your workflow, or both:
 
@@ -43,7 +43,7 @@ uv tool install git+https://github.com/microsoft/amplifier
 ### Step 2 — Create your project from this template
 
 ```bash
-gh repo create my-project --template kenotron-ms/amplifier-template --public --clone
+gh repo create my-project --template kenotron-ms/canvas-project-template --public --clone
 cd my-project
 ```
 
@@ -78,7 +78,7 @@ If you use the [Claude Code](https://docs.anthropic.com/en/docs/claude-code) VS 
 ### Step 1 — Create your project from this template
 
 ```bash
-gh repo create my-project --template kenotron-ms/amplifier-template --public --clone
+gh repo create my-project --template kenotron-ms/canvas-project-template --public --clone
 cd my-project
 ```
 
