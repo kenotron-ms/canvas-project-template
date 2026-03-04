@@ -24,9 +24,6 @@ includes:
   # ── File editing (apply_patch tool) ─────────────────────────────────────────
   - bundle: git+https://github.com/microsoft/amplifier-bundle-filesystem@main#subdirectory=behaviors/apply-patch.yaml
 
-  # ── Memory / engram ──────────────────────────────────────────────────────────
-  - bundle: git+https://github.com/kenotron-ms/engram@main#subdirectory=behaviors/engram.yaml
-
 session:
   orchestrator:
     module: loop-streaming
