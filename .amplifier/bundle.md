@@ -25,7 +25,7 @@ includes:
   - bundle: git+https://github.com/microsoft/amplifier-bundle-filesystem@main#subdirectory=behaviors/apply-patch.yaml
 
   # ── Memory / engram ──────────────────────────────────────────────────────────
-  - bundle: git+https://github.com/kenotron-ms/engram@main#subdirectory=behaviors/engram.yaml
+  - bundle: git+https://github.com/kenotron-ms/engram-lite@main#subdirectory=behaviors/engram-lite.yaml
 
 session:
   orchestrator:

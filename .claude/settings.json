@@ -1,15 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "extraKnownMarketplaces": {
-    "engram": {
+    "engram-lite": {
       "source": {
         "source": "github",
-        "repo": "kenotron-ms/engram"
+        "repo": "kenotron-ms/engram-lite"
       },
       "autoUpdate": true
     }
   },
   "enabledPlugins": {
-    "engram@engram": true
+    "engram-lite@engram-lite": true
   }
 }
